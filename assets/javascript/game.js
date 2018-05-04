@@ -135,3 +135,7 @@ var hangman = {
 }
 
 hangman.keyed();
+
+/* for (var i = 0; i < answerArray.length; i++;{
+anserArray [i] = "_";
+}*/
