@@ -1,6 +1,6 @@
 alert("Press any key to play");
 
-var wins = 1;
+var wins = 0;
 var guessed = " ";
 var attempts = 10;
 var validKeyPress = " ";
@@ -38,9 +38,22 @@ var hangman = {
             if (guessed.includes(userGuess)){
                 return;
             } else if (attempts != 0) {
-                guessed += userGuess;
-                attempts--;
-                hangman.letsGuess();
+                if (activeWord.includes(userGuess)){
+                    for (var i = 0; i < activeWord.length; i++){
+                        if (userGuess === activeWord[i]){
+                            console.log(userGuess);
+                        }
+                    }
+                    // if (/*word is spelled out*/){
+                    //     wins = wins + 1;
+                    //     document.getElementById("wins").innerHTML = wins;
+                    //     hangman.enterToRestart();
+                    // }
+                } else {
+                    guessed += userGuess;
+                    attempts--;
+                    hangman.letsGuess();
+                }
             }
         }
     },
@@ -50,17 +63,21 @@ var hangman = {
             document.getElementById("guesses-left").innerHTML = attempts;
             document.getElementById("gletters").innerHTML = guessed;
             document.getElementById("game-end").innerHTML = "Press 'Enter' for a new word!";
-            document.addEventListener('keypress', function(e){
-                var key = e.which || e.keyCode;
-                if (key === 13){
-                    hangman.gameRestart();
-                }
-            })
+            hangman.enterToRestart();
             
         } else {
             document.getElementById("guesses-left").innerHTML = attempts;
             document.getElementById("gletters").innerHTML = guessed;
         }
+    },
+
+    enterToRestart: function(){
+        document.addEventListener('keypress', function(e){
+            var key = e.which || e.keyCode;
+            if (key === 13){
+                hangman.gameRestart();
+            }
+        })
     },
 
     // scoreWatcher: function() {
@@ -85,7 +102,7 @@ var hangman = {
             validKeyPress += String.fromCharCode(i);
         }
     },
-
+    //the keyed method is called below the object to start the entire game
     keyed: function() {
         hangman.randomWord();
         hangman.wordMatch();
@@ -93,7 +110,7 @@ var hangman = {
             hangman.gameWorks();
         }
     },
-
+    //the three methods following this comment are used together in the generator
     randomWord: function() {
         return wordRando = hangman.words[Math.floor(Math.random() * hangman.words.length)];
     },
@@ -107,7 +124,10 @@ var hangman = {
             hangman.randomWord();
         }
     },
-
+    /*The generator below uses a combination of the above three methods
+    (randomWord, wordMatch, randomCheck)
+    to generate a random word that is not the same as the last generated
+    word, while avoiding an infinite recursive loop*/
     generator: function() {
         hangman.randomCheck();
         hangman.wordMatch();
