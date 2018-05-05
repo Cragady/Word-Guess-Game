@@ -63,14 +63,19 @@ var hangman = {
 
     gameWin: function() {
         winCheck = answer.join("");
-        // if (winCheck === activeWord) {
         if (finished === true) {
             wins = wins + 1;
             document.getElementById("wins").innerHTML = wins;
             document.getElementById("game-end").innerHTML = "Press 'Enter' for a new word!";
             hangman.enterToRestart();
+            hangman.playJingle();
             return finished = undefined;
         }
+    },
+
+    playJingle: function() {
+        var audio = document.getElementById("jingle");
+        audio.play();
     },
 
     letsGuess: function() {
