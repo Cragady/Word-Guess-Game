@@ -41,6 +41,7 @@ var hangman = {
                             var nodeTarget = document.getElementById("active-word").childNodes[i];
                             nodeTarget.replaceChild(textnode, nodeTarget.childNodes[0]);
                             answer[i] = userGuess;
+                            hangman.gameWin();
                         }
                     }
                 } else {
@@ -57,6 +58,8 @@ var hangman = {
         if (winCheck === activeWord) {
             wins = wins + 1;
             document.getElementById("wins").innerHTML = wins;
+            document.getElementById("game-end").innerHTML = "Press 'Enter' for a new word!";
+            hangman.enterToRestart();
         }
     },
 
