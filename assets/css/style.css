@@ -12,3 +12,8 @@ h1 {
 #gletters{
     clear: both;
 }
+
+.clear-both{
+    float: left;
+    clear: both;
+}
