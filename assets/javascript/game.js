@@ -6,6 +6,7 @@ var attempts = 10;
 var validKeyPress = " ";
 var activeWord = " ";
 var wordRando = " ";
+var answer = [];
 // var wordList = hangman.words[Math.floor(Math.random() * hangman.words.length)];
 //function yesGuess() {if (userGuess === indexOf)};
 
@@ -39,20 +40,23 @@ var hangman = {
                             var textnode = document.createTextNode(userGuess);
                             var nodeTarget = document.getElementById("active-word").childNodes[i];
                             nodeTarget.replaceChild(textnode, nodeTarget.childNodes[0]);
-                            console.log(userGuess);
+                            answer[i] = userGuess;
                         }
                     }
-                    // if (/*word is spelled out*/){
-                    //     wins = wins + 1;
-                    //     document.getElementById("wins").innerHTML = wins;
-                    //     hangman.enterToRestart();
-                    // }
                 } else {
                     guessed += userGuess;
                     attempts--;
                     hangman.letsGuess();
                 }
             }
+        }
+    },
+
+    gameWin: function() {
+        winCheck = answer.join("");
+        if (winCheck === activeWord) {
+            wins = wins + 1;
+            document.getElementById("wins").innerHTML = wins;
         }
     },
 
@@ -85,9 +89,14 @@ var hangman = {
     // },
 
     gameRestart: function() {
-        if (attempts === 0) {
+        if ((attempts === 0) || (answer = activeWord)) {
+            var divTarget = document.getElementById("active-word");
+            while (divTarget.hasChildNodes()) {
+                divTarget.removeChild(divTarget.lastChild);
+            }
             attempts = 10;
             guessed = " ";
+            answer = " ";
             document.getElementById("game-end").innerHTML = " ";
             hangman.letsGuess();
             hangman.generator();
@@ -135,7 +144,7 @@ var hangman = {
             divLetters.className = (i + " p-floats");
             divLetters.appendChild(textNode);
             divTarget.appendChild(divLetters);
-            
+            answer[i] = "_";
 
 
         }
