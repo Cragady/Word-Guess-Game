@@ -7,6 +7,8 @@ var validKeyPress = " ";
 var activeWord = " ";
 var wordRando = " ";
 var answer = [];
+var finished = false;
+var winCheck;
 // var wordList = hangman.words[Math.floor(Math.random() * hangman.words.length)];
 //function yesGuess() {if (userGuess === indexOf)};
 
@@ -30,6 +32,9 @@ var hangman = {
         hangman.validKeyPress();
         var userGuess = event.key; 
         userGuess = userGuess.toLowerCase();
+        if (finished === undefined) {
+            return;
+            }
         if (validKeyPress.includes(userGuess)){
             if (guessed.includes(userGuess)){
                 return;
@@ -41,7 +46,10 @@ var hangman = {
                             var nodeTarget = document.getElementById("active-word").childNodes[i];
                             nodeTarget.replaceChild(textnode, nodeTarget.childNodes[0]);
                             answer[i] = userGuess;
-                            hangman.gameWin();
+                            winCheck = answer.join("");
+                            if (winCheck === activeWord){
+                                return finished = true;
+                            }
                         }
                     }
                 } else {
@@ -55,11 +63,13 @@ var hangman = {
 
     gameWin: function() {
         winCheck = answer.join("");
-        if (winCheck === activeWord) {
+        // if (winCheck === activeWord) {
+        if (finished === true) {
             wins = wins + 1;
             document.getElementById("wins").innerHTML = wins;
             document.getElementById("game-end").innerHTML = "Press 'Enter' for a new word!";
             hangman.enterToRestart();
+            return finished = undefined;
         }
     },
 
@@ -92,7 +102,7 @@ var hangman = {
     // },
 
     gameRestart: function() {
-        if ((attempts === 0) || (answer = activeWord)) {
+        if ((attempts === 0) || (finished = true)) {
             var divTarget = document.getElementById("active-word");
             while (divTarget.hasChildNodes()) {
                 divTarget.removeChild(divTarget.lastChild);
@@ -100,6 +110,7 @@ var hangman = {
             attempts = 10;
             guessed = " ";
             answer = [];
+            finished = false;
             document.getElementById("game-end").innerHTML = " ";
             hangman.letsGuess();
             hangman.generator();
@@ -120,6 +131,7 @@ var hangman = {
         hangman.blankLettersPrint();
         document.onkeyup = function(event){
             hangman.gameWorks();
+            hangman.gameWin();
         }
     },
     //the four methods following this comment are used together in the generator
@@ -165,10 +177,3 @@ var hangman = {
 }
 
 hangman.keyed();
-
-/* for (var i = 0; i < answerArray.length; i++;{
-answerArray [i] = "_";
-}*/
-
-//write a for loop where you've assigned the id to div [i] to write to the spot
-//of [i] in the answer layout
