@@ -96,7 +96,7 @@ var hangman = {
             }
             attempts = 10;
             guessed = " ";
-            answer = " ";
+            answer = [];
             document.getElementById("game-end").innerHTML = " ";
             hangman.letsGuess();
             hangman.generator();
