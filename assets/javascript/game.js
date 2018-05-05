@@ -16,13 +16,6 @@ var wordRando = " ";
 //possible confusion
 
 var hangman = {
-    // words: {
-    //     hopscotch: 'h o p s c o t c h',
-    //     solitaire: 's o l i t a i r e',
-    //     chess: 'c h e s s',
-    //     monopoly: 'm o n o p o l y',
-    //     backgammon: 'b a c k g a m m o n'
-    // },
     words: [
             'hopscotch',
             'solitaire',
@@ -43,7 +36,9 @@ var hangman = {
                 if (activeWord.includes(userGuess)){
                     for (var i = 0; i < activeWord.length; i++){
                         if (userGuess === activeWord[i]){
-                            document.getElementsByClassName(i).innerHTML = "userGuess";
+                            var textnode = document.createTextNode(userGuess);
+                            var nodeTarget = document.getElementById("active-word").childNodes[i];
+                            nodeTarget.replaceChild(textnode, nodeTarget.childNodes[0]);
                             console.log(userGuess);
                         }
                     }
