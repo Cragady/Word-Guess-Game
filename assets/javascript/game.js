@@ -11,7 +11,9 @@ var wordRando = " ";
 
 
 
-
+//there is a fair amount of meta-referencing going on in this code,
+//so I tried to follow a good naming convention to cut down on any
+//possible confusion
 
 var hangman = {
     // words: {
@@ -41,6 +43,7 @@ var hangman = {
                 if (activeWord.includes(userGuess)){
                     for (var i = 0; i < activeWord.length; i++){
                         if (userGuess === activeWord[i]){
+                            document.getElementsByClassName(i).innerHTML = "userGuess";
                             console.log(userGuess);
                         }
                     }
@@ -95,6 +98,7 @@ var hangman = {
             hangman.generator();
         }
     },
+
     //this sets validKeyPress to all alphabetic characters
     validKeyPress: function() {
         var first = "a", last = "z";
@@ -106,11 +110,12 @@ var hangman = {
     keyed: function() {
         hangman.randomWord();
         hangman.wordMatch();
+        hangman.blankLettersPrint();
         document.onkeyup = function(event){
             hangman.gameWorks();
         }
     },
-    //the three methods following this comment are used together in the generator
+    //the four methods following this comment are used together in the generator
     randomWord: function() {
         return wordRando = hangman.words[Math.floor(Math.random() * hangman.words.length)];
     },
@@ -124,6 +129,22 @@ var hangman = {
             hangman.randomWord();
         }
     },
+
+    blankLettersPrint: function(){
+        
+        var divTarget = document.getElementById("active-word");
+        var tagTarget = document.getElementsByTagName("P");
+        for (var i = 0; i < activeWord.length; i++){
+            var divLetters = document.createElement("p");
+            var textNode = document.createTextNode("_");
+            divLetters.className = (i + " p-floats");
+            divLetters.appendChild(textNode);
+            divTarget.appendChild(divLetters);
+            
+
+
+        }
+    }, 
     /*The generator below uses a combination of the above three methods
     (randomWord, wordMatch, randomCheck)
     to generate a random word that is not the same as the last generated
@@ -131,11 +152,16 @@ var hangman = {
     generator: function() {
         hangman.randomCheck();
         hangman.wordMatch();
+        hangman.blankLettersPrint();
+
     }
 }
 
 hangman.keyed();
 
 /* for (var i = 0; i < answerArray.length; i++;{
-anserArray [i] = "_";
+answerArray [i] = "_";
 }*/
+
+//write a for loop where you've assigned the id to div [i] to write to the spot
+//of [i] in the answer layout
