@@ -10,29 +10,35 @@
     <title>Hangman</title>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Hangman</h1>
-            <h2>Games</h2>
-        </header>
+    <div id="wrap">
+        <div id="main">
+            <header class="card text-center bg-secondary text-white">
+                <h1>Hangman</h1>
+                <h2>Category: Games</h2>
+            </header>
+            <div id="content-ext" class="p-5 mx-auto">
+                
+                <div class="container">
+                <section id="game-sect" class="p-2">
+                    <h5>Wins:</h5>
+                    <div id="wins">0</div>
+                    <h5>Remaining Attempts:</h5>
+                    <div id="guesses-left">10</div>
+                    <h5>Correct Letters:</h5>
+                    <div id="active-word" class="aw-text"></div>
+                    <h5 class="clear-both">Guessed Letters:</h5>
+                    <div id="gletters" class="text-danger"></div>
+                    <div id="game-end"></div>
+                </section>
+                </div>
+            </div>
+        </div>
 
-        <section>
-            <h5>Wins:</h5>
-            <div id="wins">0</div>
-            <h5>Remaining Attempts:</h5>
-            <div id="guesses-left">10</div>
-            <h5>Correct Letters:</h5>
-            <div id="active-word"></div>
-            <h5 class="clear-both">Guessed Letters:</h5>
-            <div id="gletters"></div>
-            <div id="game-end"></div>
-        </section>
-        
+        <audio id="jingle">
+            <source src="assets/sounds/FF7.mp3" type="audio/mpeg">
+        </audio>
+
     </div>
-
-    <audio id="jingle">
-        <source src="assets/sounds/FF7.mp3" type="audio/mpeg">
-    </audio>
 
     <script src="assets/javascript/game.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

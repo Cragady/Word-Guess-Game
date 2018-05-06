@@ -1,3 +1,13 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+#gletters, #active-word{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-style: italic;
+}
+
 h1 {
     font-weight: bold;
     font-size: 32px;
@@ -11,9 +21,43 @@ h1 {
 
 #gletters{
     clear: both;
+    font-size: 2em;
+    letter-spacing: 0.4em;
+}
+
+.aw-text{
+    color: #601294;
 }
 
 .clear-both{
     float: left;
     clear: both;
+}
+
+#main {
+    overflow: auto;
+    padding-bottom: 150px;
+}
+
+#content-ext{
+    margin-top: 40px;
+    max-width: 960px;
+}
+
+#game-sect{
+    background: rgba(82, 197, 212, 0.384);
+}
+
+#wrap{
+    min-height: 100%;
+    background: url(../images/intersection.png);
+}
+
+.footer{
+    position: relative;
+    margin-top: -15px;
+    height: 15px;
+    clear: both;
+    padding-top: 20px;
+    opacity: 0;
 }
