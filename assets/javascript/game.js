@@ -9,10 +9,6 @@ var wordRando = " ";
 var answer = [];
 var finished = false;
 var winCheck;
-// var wordList = hangman.words[Math.floor(Math.random() * hangman.words.length)];
-//function yesGuess() {if (userGuess === indexOf)};
-
-
 
 //there is a fair amount of meta-referencing going on in this code,
 //so I tried to follow a good naming convention to cut down on any
@@ -26,8 +22,7 @@ var hangman = {
             'monopoly',
             'backgammon'
     ],
-    //hangman.words.hopscotch.includes('0'); //returns true
-    // .split() converts item to array
+    
     gameWorks: function(){
         hangman.validKeyPress();
         var userGuess = event.key; 
@@ -100,12 +95,6 @@ var hangman = {
         })
     },
 
-    // scoreWatcher: function() {
-    //     document.addEventListener(attempts === 0, function(){
-    //         hangman.gameRestart;
-    //     });
-    // },
-
     gameRestart: function() {
         if ((attempts === 0) || (finished = true)) {
             var divTarget = document.getElementById("active-word");
@@ -141,11 +130,11 @@ var hangman = {
     },
     //the four methods following this comment are used together in the generator
     randomWord: function() {
-        return wordRando = hangman.words[Math.floor(Math.random() * hangman.words.length)];
+        wordRando = hangman.words[Math.floor(Math.random() * hangman.words.length)];
     },
 
     wordMatch: function() {
-        return activeWord = wordRando;
+        activeWord = wordRando;
     },
 
     randomCheck: function() {
@@ -169,9 +158,9 @@ var hangman = {
 
         }
     }, 
-    /*The generator below uses a combination of the above three methods
-    (randomWord, wordMatch, randomCheck)
-    to generate a random word that is not the same as the last generated
+    /*The generator below uses a combination of the above four methods
+    (randomWord, wordMatch, randomCheck, blankLettersPrint)
+    is supposed to generate a random word that is not the same as the last generated
     word, while avoiding an infinite recursive loop*/
     generator: function() {
         hangman.randomCheck();
