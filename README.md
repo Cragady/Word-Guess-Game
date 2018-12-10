@@ -1,3 +1,5 @@
+[Application](https://cragady.github.io/Word-Guess-Game/)
+
 #### Hangman Game Overview
 
 The purpose of this project was to create a working word guessing game using JavaScript, showing enough understanding of JavaScript to get multiple functions working together to create a functional game. 
